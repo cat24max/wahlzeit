@@ -19,6 +19,14 @@ public class Location {
         this.coordinate = new Coordinate(x, y, z);
     }
 
+    /**
+	 * 
+	 * @methodtype get
+	 */
+    public Coordinate getCoordinate() {
+        return coordinate;
+    }
+
 
 
 

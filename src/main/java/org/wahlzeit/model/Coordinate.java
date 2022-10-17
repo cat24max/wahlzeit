@@ -21,14 +21,26 @@ public class Coordinate {
         this.z = z;
     }
 
+    /**
+	 * 
+	 * @methodtype get
+	 */
     public double getX() {
         return x;
     }
 
+    /**
+	 * 
+	 * @methodtype get
+	 */
     public double getY() {
         return y;
     }
 
+    /**
+	 * 
+	 * @methodtype get
+	 */
     public double getZ() {
         return z;
     }

@@ -45,4 +45,12 @@ public class Coordinate {
         return z;
     }
 
+    /**
+	 * 
+	 * @methodtype get
+	 */
+    public double getDistance(Coordinate other) {
+        return Math.sqrt(Math.pow(other.x - this.x, 2) + Math.pow(other.y - this.y, 2) + Math.pow(other.z - this.z, 2));
+    }
+
 }

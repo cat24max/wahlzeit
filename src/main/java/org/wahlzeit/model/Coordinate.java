@@ -49,8 +49,27 @@ public class Coordinate {
 	 * 
 	 * @methodtype get
 	 */
-    public double getDistance(Coordinate other) {
+    protected double getDistance(Coordinate other) {
         return Math.sqrt(Math.pow(other.x - this.x, 2) + Math.pow(other.y - this.y, 2) + Math.pow(other.z - this.z, 2));
+    }
+
+    /**
+	 * 
+	 * @methodtype boolean-query
+	 */
+    protected boolean isEqual(Coordinate other) {
+        if(this == other) return true;
+        if(other == null) return false;
+        return ((Double) this.x).equals(other.x) && ((Double) this.y).equals(other.y) && ((Double) this.z).equals(other.z);
+    }
+
+    /**
+	 * 
+	 */
+    @Override
+    public boolean equals(Object other) {
+        if(!(other instanceof Coordinate)) return false;
+        return this.isEqual((Coordinate) other);
     }
 
 }

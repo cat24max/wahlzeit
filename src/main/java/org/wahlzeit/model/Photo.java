@@ -67,6 +67,12 @@ public class Photo extends DataObject {
 	protected int width;
 	protected int height;
 	protected PhotoSize maxPhotoSize = PhotoSize.MEDIUM; // derived
+
+	/**
+	 * 
+	 */
+	public Location location;
+
 	
 	/**
 	 * 

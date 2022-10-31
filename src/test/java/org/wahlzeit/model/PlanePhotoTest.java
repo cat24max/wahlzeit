@@ -1,6 +1,8 @@
 package org.wahlzeit.model;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
@@ -13,24 +15,46 @@ import java.sql.SQLException;
  */
 public class PlanePhotoTest {
 
+    @Mock
+    private ResultSet mockedRset;
+    private ResultSet emptyMockedRset;
+
+    /**
+     *
+     */
+    @Before
+    public void createMockedRset() throws SQLException {
+        mockedRset = mock(ResultSet.class);
+        emptyMockedRset = mock(ResultSet.class);
+        // These 2 columns are required, because they are required arguments
+        when(mockedRset.getString("owner_email_address")).thenReturn("test@example.com");
+        when(mockedRset.getString("owner_home_page")).thenReturn("http://example.com");
+
+        when(mockedRset.getString("plane_type")).thenReturn("A359");
+        when(mockedRset.getString("plane_airport_location")).thenReturn("NUE");
+    }
+
     /**
      *
      */
     @Test
-    public void testCreate() throws SQLException {
-        ResultSet rset = mock(ResultSet.class);
-        
-        // These 2 columns are required, because they are required arguments
-        when(rset.getString("owner_email_address")).thenReturn("test@example.com");
-        when(rset.getString("owner_home_page")).thenReturn("http://example.com");
-        
-        when(rset.getString("plane_type")).thenReturn("A359");
-        when(rset.getString("plane_airport_location")).thenReturn("NUE");
-
-        PlanePhoto photo = new PlanePhoto(rset);
+    public void testReadFrom() throws SQLException {
+        PlanePhoto photo = new PlanePhoto(mockedRset);
 
         assertEquals("A359", photo.getAircraftType());
         assertEquals("NUE", photo.getAirportLocation());
+    }
+
+    /**
+     *
+     */
+    @Test
+    public void testWriteOn() throws SQLException {
+        PlanePhoto photo = new PlanePhoto(mockedRset);
+        photo.writeOn(emptyMockedRset);
+
+        verify(emptyMockedRset, times(1)).updateString(eq("plane_type"), eq("A359"));
+        verify(emptyMockedRset, times(1)).updateString(eq("plane_airport_location"), eq("NUE"));
     }
 
 }

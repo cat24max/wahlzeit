@@ -56,6 +56,7 @@ public class PlanePhotoFactory extends PhotoFactory {
 	/**
 	 * @methodtype factory
 	 */
+    @Override
 	public PlanePhoto createPhoto() {
 		return new PlanePhoto();
 	}
@@ -63,6 +64,7 @@ public class PlanePhotoFactory extends PhotoFactory {
 	/**
 	 * 
 	 */
+    @Override
 	public PlanePhoto createPhoto(PhotoId id) {
 		return new PlanePhoto(id);
 	}
@@ -70,7 +72,8 @@ public class PlanePhotoFactory extends PhotoFactory {
 	/**
 	 * 
 	 */
-	public Photo createPhoto(ResultSet rs) throws SQLException {
-		return new Photo(rs);
+    @Override
+	public PlanePhoto createPhoto(ResultSet rs) throws SQLException {
+		return new PlanePhoto(rs);
 	}
 }

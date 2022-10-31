@@ -1,20 +1,16 @@
 package org.wahlzeit.model;
 
 import org.junit.Test;
-import org.mockito.Mock;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- * Test cases for the Gender class.
+ * Test cases for the Photo class.
  */
 public class PhotoTest {
 

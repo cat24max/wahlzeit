@@ -75,14 +75,17 @@ public class CartesianCoordinate implements Coordinate {
         return this.getDistance(other.asCartesianCoordinate());
     }
 
+    /**
+	 * Source: https://keisan.casio.com/exec/system/1359533867
+	 */
     @Override
     public SphericCoordinate asSphericCoordinate() {
         CartesianCoordinate origin = new CartesianCoordinate(0, 0, 0);
         double radius = this.getCartesianDistance(origin);
         if(((Double) radius).equals(0.0)) return new SphericCoordinate(0, 0, 0);
 
-        double theta = Math.atan(y / x);
-        double phi = Math.atan(Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)) / z);
+        final double theta = Math.acos(z / radius);
+        final double phi = Math.atan2(y, x);
         return new SphericCoordinate(phi, theta, radius);
     }
 

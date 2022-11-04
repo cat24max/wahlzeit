@@ -77,14 +77,18 @@ public class CartesianCoordinate implements Coordinate {
 
     @Override
     public SphericCoordinate asSphericCoordinate() {
-        // TODO Auto-generated method stub
-        return null;
+        CartesianCoordinate origin = new CartesianCoordinate(0, 0, 0);
+        double radius = this.getCartesianDistance(origin);
+        if(((Double) radius).equals(0.0)) return new SphericCoordinate(0, 0, 0);
+
+        double theta = Math.atan(y / x);
+        double phi = Math.atan(Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)) / z);
+        return new SphericCoordinate(phi, theta, radius);
     }
 
     @Override
     public double getCentralAngle(Coordinate other) {
-        // TODO Auto-generated method stub
-        return 0;
+        return this.asSphericCoordinate().getCentralAngle(other);
     }
 
     @Override

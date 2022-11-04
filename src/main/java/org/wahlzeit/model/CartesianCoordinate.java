@@ -1,6 +1,6 @@
 package org.wahlzeit.model;
 
-public class CartesianCoordinate implements Coordinate {
+public class CartesianCoordinate extends AbstractCoordinate {
     
     private double x, y, z;
 
@@ -56,34 +56,9 @@ public class CartesianCoordinate implements Coordinate {
         return isDoubleEqual(this.x, other.x) && isDoubleEqual(this.y, other.y) && isDoubleEqual(this.z, other.z);
     }
 
-    private boolean isDoubleEqual(double one, double two) {
-        double epsilon = 0.001;
-        double diff = 0;
-        if(one >= two) {
-            diff = one - two;
-        } else {
-            diff = two - one;
-        }
-        return diff < epsilon;
-    }
-
-    /**
-	 * 
-	 */
-    @Override
-    public boolean equals(Object other) {
-        if(!(other instanceof CartesianCoordinate)) return false;
-        return this.isEqual((CartesianCoordinate) other);
-    }
-
     @Override
     public CartesianCoordinate asCartesianCoordinate() {
         return this;
-    }
-
-    @Override
-    public double getCartesianDistance(Coordinate other) {
-        return this.getDistance(other.asCartesianCoordinate());
     }
 
     /**
@@ -101,13 +76,8 @@ public class CartesianCoordinate implements Coordinate {
     }
 
     @Override
-    public double getCentralAngle(Coordinate other) {
-        return this.asSphericCoordinate().getCentralAngle(other);
-    }
-
-    @Override
-    public boolean isEqual(Coordinate other) {
-        return this.isEqual(other.asCartesianCoordinate());
+    public double getCartesianDistance(Coordinate other) {
+        return this.getDistance(other.asCartesianCoordinate());
     }
 
 }

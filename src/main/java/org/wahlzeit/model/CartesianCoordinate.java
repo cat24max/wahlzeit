@@ -53,7 +53,18 @@ public class CartesianCoordinate implements Coordinate {
     protected boolean isEqual(CartesianCoordinate other) {
         if(this == other) return true;
         if(other == null) return false;
-        return ((Double) this.x).equals(other.x) && ((Double) this.y).equals(other.y) && ((Double) this.z).equals(other.z);
+        return isDoubleEqual(this.x, other.x) && isDoubleEqual(this.y, other.y) && isDoubleEqual(this.z, other.z);
+    }
+
+    private boolean isDoubleEqual(double one, double two) {
+        double epsilon = 0.001;
+        double diff = 0;
+        if(one >= two) {
+            diff = one - two;
+        } else {
+            diff = two - one;
+        }
+        return diff < epsilon;
     }
 
     /**

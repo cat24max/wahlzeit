@@ -45,7 +45,18 @@ public class SphericCoordinate implements Coordinate {
     protected boolean isEqual(SphericCoordinate other) {
         if(this == other) return true;
         if(other == null) return false;
-        return ((Double) this.phi).equals(other.phi) && ((Double) this.theta).equals(other.theta) && ((Double) this.radius).equals(other.radius);
+        return isDoubleEqual(this.phi, other.phi) && isDoubleEqual(this.theta, other.theta) && isDoubleEqual(this.radius, other.radius);
+    }
+
+    private boolean isDoubleEqual(double one, double two) {
+        double epsilon = 0.001;
+        double diff = 0;
+        if(one >= two) {
+            diff = one - two;
+        } else {
+            diff = two - one;
+        }
+        return diff < epsilon;
     }
 
     /**

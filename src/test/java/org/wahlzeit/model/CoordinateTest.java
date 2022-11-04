@@ -58,6 +58,11 @@ public class CoordinateTest {
         assertTrue(new CartesianCoordinate(2, 1, 0).equals(coord));
         assertTrue(new CartesianCoordinate(2, 1, 0).equals(new CartesianCoordinate(2, 1, 0)));
         assertFalse(new CartesianCoordinate(2, 1, 3).equals(coord));
+
+		SphericCoordinate coord2 = new SphericCoordinate(23.64723, 9.7632, 120);
+		assertTrue(new SphericCoordinate(23.64723, 9.7632, 120).equals(coord2));
+        assertTrue(new SphericCoordinate(23.64723, 9.7632, 120).equals(new SphericCoordinate(23.64723, 9.7632, 120)));
+        assertFalse(new SphericCoordinate(23.64723, 9.7632, 120.252).equals(coord2));
 	}
 
 	/**
@@ -85,6 +90,7 @@ public class CoordinateTest {
 		assertEquals((Double) coord.getX(), (Double) backConverted.getX(), 0.01);
 		assertEquals((Double) coord.getY(), (Double) backConverted.getY(), 0.01);
 		assertEquals((Double) coord.getZ(), (Double) backConverted.getZ(), 0.01);
+		assertEquals(coord, backConverted);
 	}
 
 	/**
@@ -94,7 +100,7 @@ public class CoordinateTest {
 	public void testCentralAngle() {
 		// Using a cartesian coord here on purpose
 		CartesianCoordinate coord1 = new CartesianCoordinate(2, 1, 0);
-        CartesianCoordinate coord2 = new CartesianCoordinate(5, 13.5, 420.69);
+        CartesianCoordinate coord2 = new CartesianCoordinate(5, 13.5, 420.42);
 		
 		double angleSame1 = coord1.getCentralAngle(coord1);
 		double angleSame2 = coord2.getCentralAngle(coord2);

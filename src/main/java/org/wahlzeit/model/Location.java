@@ -16,7 +16,7 @@ public class Location {
      * @methodtype constructor
      */
     public Location(double x, double y, double z) {
-        this.coordinate = new Coordinate(x, y, z);
+        this.coordinate = new CartesianCoordinate(x, y, z);
     }
 
     /**

@@ -29,17 +29,17 @@ public class PhotoTest {
     @Test
     public void testCreatePhotoWithLocation() {
         Photo photo = new Photo();
-        Coordinate coord = new Coordinate(1, 2, 3);
+        Coordinate coord = new CartesianCoordinate(1, 2, 3);
 
         photo.setLocation(new Location(1, 2, 3));
-        assertEquals(1.0, photo.getLocation().getCoordinate().getX(), 0);
-        assertEquals(2.0, photo.getLocation().getCoordinate().getY(), 0);
-        assertEquals(3.0, photo.getLocation().getCoordinate().getZ(), 0);
+        assertEquals(1.0, photo.getLocation().getCoordinate().asCartesianCoordinate().getX(), 0);
+        assertEquals(2.0, photo.getLocation().getCoordinate().asCartesianCoordinate().getY(), 0);
+        assertEquals(3.0, photo.getLocation().getCoordinate().asCartesianCoordinate().getZ(), 0);
 
         photo.setLocation(1, 2, 3);
-        assertEquals(1.0, photo.getLocation().getCoordinate().getX(), 0);
-        assertEquals(2.0, photo.getLocation().getCoordinate().getY(), 0);
-        assertEquals(3.0, photo.getLocation().getCoordinate().getZ(), 0);
+        assertEquals(1.0, photo.getLocation().getCoordinate().asCartesianCoordinate().getX(), 0);
+        assertEquals(2.0, photo.getLocation().getCoordinate().asCartesianCoordinate().getY(), 0);
+        assertEquals(3.0, photo.getLocation().getCoordinate().asCartesianCoordinate().getZ(), 0);
     }
 
     /**

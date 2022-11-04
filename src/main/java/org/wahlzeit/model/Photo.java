@@ -180,9 +180,9 @@ public class Photo extends DataObject {
 		rset.updateInt("no_votes", noVotes);
 		rset.updateLong("creation_time", creationTime);	
 		if(location != null && location.getCoordinate() != null) {
-			rset.updateDouble("location_coord_x", location.getCoordinate().getX());
-			rset.updateDouble("location_coord_y", location.getCoordinate().getY());
-			rset.updateDouble("location_coord_z", location.getCoordinate().getZ());
+			rset.updateDouble("location_coord_x", location.getCoordinate().asCartesianCoordinate().getX());
+			rset.updateDouble("location_coord_y", location.getCoordinate().asCartesianCoordinate().getY());
+			rset.updateDouble("location_coord_z", location.getCoordinate().asCartesianCoordinate().getZ());
 		}
 	}
 

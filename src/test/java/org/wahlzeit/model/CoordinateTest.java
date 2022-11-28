@@ -114,10 +114,21 @@ public class CoordinateTest {
 		assertEquals((Double) 1.54582, (Double) angleFlipped, 0.001);
 	}
 
-	
+	/**
+	 *
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testCreateCartesianCoordinateWithInvalidDouble() {
+		new CartesianCoordinate(Double.NaN, 1, 0);
+	}
 
-
-
+	/**
+	 *
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testCreateSphericCoordinateWithInvalidDouble() {
+		new SphericCoordinate(Double.NaN, 1, 0);
+	}
 
 
 }

@@ -12,6 +12,7 @@ public class SphericCoordinate extends AbstractCoordinate{
         this.phi = phi;
         this.theta = theta;
         this.radius = radius;
+        assertClassInvariants();
     }
 
     /**
@@ -66,6 +67,7 @@ public class SphericCoordinate extends AbstractCoordinate{
 	 */
     @Override
     public double getCentralAngle(Coordinate other) {
+        assertClassInvariants();
         SphericCoordinate sph = other.asSphericCoordinate();
 
         double bigPhiThis = Math.toRadians(90) - this.getTheta();
@@ -79,9 +81,16 @@ public class SphericCoordinate extends AbstractCoordinate{
         );
 
         double denom = Math.sin(bigPhiThis) * Math.sin(bigPhiOther) + Math.cos(bigPhiThis) * Math.cos(bigPhiOther) * Math.cos(delta);
-
+        assertClassInvariants();
         return Math.atan(num / denom);
     }
 
+    @Override
+    void assertClassInvariants() {
+        // TODO Auto-generated method stub
+        assertDoubleIsValid(radius);
+        assertDoubleIsValid(phi);
+        assertDoubleIsValid(theta);
+    }
 
 }

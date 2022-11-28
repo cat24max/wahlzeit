@@ -12,6 +12,7 @@ public class CartesianCoordinate extends AbstractCoordinate {
         this.x = x;
         this.y = y;
         this.z = z;
+        assertClassInvariants();
     }
 
     /**
@@ -78,6 +79,14 @@ public class CartesianCoordinate extends AbstractCoordinate {
     @Override
     public double getCartesianDistance(Coordinate other) {
         return this.getDistance(other.asCartesianCoordinate());
+    }
+
+    @Override
+    void assertClassInvariants() {
+        // TODO Auto-generated method stub
+        assertDoubleIsValid(x);
+        assertDoubleIsValid(y);
+        assertDoubleIsValid(z);
     }
 
 }

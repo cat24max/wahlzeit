@@ -52,8 +52,8 @@ public class CartesianCoordinate extends AbstractCoordinate {
 	 * @methodtype boolean-query
 	 */
     protected boolean isEqual(CartesianCoordinate other) {
+        assertNotNull(other);
         if(this == other) return true;
-        if(other == null) return false;
         return isDoubleEqual(this.x, other.x) && isDoubleEqual(this.y, other.y) && isDoubleEqual(this.z, other.z);
     }
 
@@ -68,16 +68,22 @@ public class CartesianCoordinate extends AbstractCoordinate {
     @Override
     public SphericCoordinate asSphericCoordinate() {
         CartesianCoordinate origin = new CartesianCoordinate(0, 0, 0);
+        assertNotNull(origin);
         double radius = this.getCartesianDistance(origin);
+        assertDoubleIsValid(radius);
+        assertNotNegative(radius);
         if(((Double) radius).equals(0.0)) return new SphericCoordinate(0, 0, 0);
 
         final double theta = Math.acos(z / radius);
         final double phi = Math.atan2(y, x);
-        return new SphericCoordinate(phi, theta, radius);
+        SphericCoordinate result = new SphericCoordinate(phi, theta, radius);
+        assertNotNull(result);
+        return result;
     }
 
     @Override
     public double getCartesianDistance(Coordinate other) {
+        assertNotNull(other);
         return this.getDistance(other.asCartesianCoordinate());
     }
 

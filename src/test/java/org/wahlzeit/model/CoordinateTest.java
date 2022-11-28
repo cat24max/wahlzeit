@@ -43,10 +43,8 @@ public class CoordinateTest {
 	 */
 	@Test
 	public void testEqualsWrongValues() {
-        assertFalse(new CartesianCoordinate(2, 1, 0).equals(null));
         assertFalse(new CartesianCoordinate(2, 1, 3).equals(new Object()));
         assertFalse(new Object().equals(new CartesianCoordinate(2, 1, 3)));
-        assertFalse(new CartesianCoordinate(2, 1, 3).isEqual(null));
 	}
 
     /**

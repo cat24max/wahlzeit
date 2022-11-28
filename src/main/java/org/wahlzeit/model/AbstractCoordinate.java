@@ -31,6 +31,7 @@ public abstract class AbstractCoordinate implements Coordinate {
     @Override
     public boolean equals(Object other) {
         assertClassInvariants();
+        assertNotNull(other);
         if(!(other instanceof Coordinate)) return false;
         boolean result = this.isEqual((Coordinate) other);
         assertClassInvariants();
@@ -40,6 +41,7 @@ public abstract class AbstractCoordinate implements Coordinate {
     @Override
     public double getCartesianDistance(Coordinate other) {
         assertClassInvariants();
+        assertNotNull(other);
         double result = this.asCartesianCoordinate().getCartesianDistance(other);
         assertNotNegative(result);
         assertClassInvariants();
@@ -49,6 +51,7 @@ public abstract class AbstractCoordinate implements Coordinate {
     @Override
     public double getCentralAngle(Coordinate otherCoordinate) {
         assertClassInvariants();
+        assertNotNull(otherCoordinate);
         double result = this.asSphericCoordinate().getCentralAngle(otherCoordinate);
         assertValidCenterAngle(result);
         assertClassInvariants();

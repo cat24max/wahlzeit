@@ -44,8 +44,8 @@ public class SphericCoordinate extends AbstractCoordinate{
 	 * @methodtype boolean-query
 	 */
     protected boolean isEqual(SphericCoordinate other) {
+        assertNotNull(other);
         if(this == other) return true;
-        if(other == null) return false;
         return isDoubleEqual(this.phi, other.phi) && isDoubleEqual(this.theta, other.theta) && isDoubleEqual(this.radius, other.radius);
     }
 
@@ -54,7 +54,9 @@ public class SphericCoordinate extends AbstractCoordinate{
         double x = radius * Math.sin(theta) * Math.cos(phi);
         double y = radius * Math.sin(theta) * Math.sin(phi);
         double z = radius * Math.cos(theta);
-        return new CartesianCoordinate(x, y, z);
+        CartesianCoordinate result = new CartesianCoordinate(x, y, z);
+        assertNotNull(result);
+        return result;
     }
 
     @Override
@@ -68,7 +70,9 @@ public class SphericCoordinate extends AbstractCoordinate{
     @Override
     public double getCentralAngle(Coordinate other) {
         assertClassInvariants();
+        assertNotNull(other);
         SphericCoordinate sph = other.asSphericCoordinate();
+        assertNotNull(sph);
 
         double bigPhiThis = Math.toRadians(90) - this.getTheta();
         double bigPhiOther = Math.toRadians(90) - sph.getTheta();
@@ -82,7 +86,9 @@ public class SphericCoordinate extends AbstractCoordinate{
 
         double denom = Math.sin(bigPhiThis) * Math.sin(bigPhiOther) + Math.cos(bigPhiThis) * Math.cos(bigPhiOther) * Math.cos(delta);
         assertClassInvariants();
-        return Math.atan(num / denom);
+        double result = Math.atan(num / denom);
+        assertValidCenterAngle(result);
+        return result;
     }
 
     @Override

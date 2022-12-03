@@ -502,5 +502,9 @@ public class Photo extends DataObject {
 	public Location getLocation() {
 		return location;
 	}
+
+	public void assertClassInvariants() {
+		
+	}
 	
 }

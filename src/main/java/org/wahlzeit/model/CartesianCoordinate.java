@@ -71,7 +71,7 @@ public class CartesianCoordinate extends AbstractCoordinate {
         assertNotNull(origin);
         double radius = this.getCartesianDistance(origin);
         assertDoubleIsValid(radius);
-        assertNotNegative(radius);
+        assertPositive(radius);
         if(((Double) radius).equals(0.0)) return new SphericCoordinate(0, 0, 0);
 
         final double theta = Math.acos(z / radius);

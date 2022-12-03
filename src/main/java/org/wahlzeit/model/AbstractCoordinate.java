@@ -43,7 +43,7 @@ public abstract class AbstractCoordinate implements Coordinate {
         assertClassInvariants();
         assertNotNull(other);
         double result = this.asCartesianCoordinate().getCartesianDistance(other);
-        assertNotNegative(result);
+        assertPositive(result);
         assertClassInvariants();
         return result;
     }
@@ -61,25 +61,23 @@ public abstract class AbstractCoordinate implements Coordinate {
     abstract void assertClassInvariants();
 
     void assertNotNull(Object obj) {
-        if(obj == null) throw new NullPointerException();
+        if(obj == null) throw new NullPointerException("object should not be null");
     }
 
     void assertDoubleIsValid(double d) {
         Double check = (Double) d;
-        if(check.isNaN()) throw new IllegalArgumentException();
-        if(check.isInfinite()) throw new IllegalArgumentException();
+        if(check.isNaN()) throw new IllegalArgumentException("double should be a number");
+        if(check.isInfinite()) throw new IllegalArgumentException("double should not be infinite");
     }
 
     void assertPositive(double d){
-        if (d < 0) throw new IllegalArgumentException();
+        if (d < 0) throw new IllegalArgumentException("double should be positive");
     }
 
-    void assertNotNegative(double d){
-        if(d < 0) throw new IllegalArgumentException();
-    }
+    // assertPositive and assertNotNegative was a nice braindead moment :D
 
     void assertValidCenterAngle(double ang){
-        if(ang < Math.toRadians(0) || ang > Math.toRadians(180)) throw new RuntimeException();
+        if(ang < Math.toRadians(0) || ang > Math.toRadians(180)) throw new RuntimeException("center angle double should be between 0 and 180 deg");
     }
     
 }

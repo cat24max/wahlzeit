@@ -97,7 +97,7 @@ public class SphericCoordinate extends AbstractCoordinate{
         assertDoubleIsValid(radius);
         assertDoubleIsValid(phi);
         assertDoubleIsValid(theta);
-        assertNotNegative(radius);
+        assertPositive(radius);
     }
 
 }

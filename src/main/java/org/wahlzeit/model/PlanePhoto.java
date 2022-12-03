@@ -14,6 +14,7 @@ public class PlanePhoto extends Photo {
 	 */
     public PlanePhoto() {
         super();
+		assertClassInvariants();
     }
 	
 	/**
@@ -22,6 +23,7 @@ public class PlanePhoto extends Photo {
 	 */
 	public PlanePhoto(PhotoId myId) {
 		super(myId);
+		assertClassInvariants();
 	}
 	
 	/**
@@ -30,6 +32,7 @@ public class PlanePhoto extends Photo {
 	 */
 	public PlanePhoto(ResultSet rset) throws SQLException {
 		super(rset);
+		assertClassInvariants();
 	}
 
     /**
@@ -53,6 +56,7 @@ public class PlanePhoto extends Photo {
 	 * @methodtype set
 	 */
     public void setAircraftType(String type) {
+		assertValidAircraftType(type);
         this.type = type;
     }
     
@@ -61,6 +65,7 @@ public class PlanePhoto extends Photo {
 	 * @methodtype set
 	 */
     public void setAirportLocation(String airportLocation) {
+		assertValidICAOCode(airportLocation);
         this.airportLocation = airportLocation;
     }
 
@@ -72,6 +77,7 @@ public class PlanePhoto extends Photo {
 		super.readFrom(rset);
 		this.type = rset.getString("plane_type");
         this.airportLocation = rset.getString("plane_airport_location");
+		assertClassInvariants();
 	}
 	
 	/**
@@ -79,8 +85,23 @@ public class PlanePhoto extends Photo {
 	 */
     @Override
 	public void writeOn(ResultSet rset) throws SQLException {
+		assertClassInvariants();
         super.writeOn(rset);
 		rset.updateString("plane_type", this.type);
 		rset.updateString("plane_airport_location", this.airportLocation);
+	}
+
+	public void assertValidAircraftType(String type) {
+		if((type.length() != 4 || type.length() != 3) && type != null) throw new IllegalArgumentException("Plane type is not a valid ICAO type designator");
+	}
+
+	public void assertValidICAOCode(String airportLocation) {
+		if(airportLocation.length() != 4 && type != null) throw new IllegalArgumentException("airportLocation is not valid");
+	}
+
+	public void assertClassInvariants() {
+		super.assertClassInvariants();
+		assertValidAircraftType(this.type);
+		assertValidICAOCode(this.airportLocation);
 	}
 }

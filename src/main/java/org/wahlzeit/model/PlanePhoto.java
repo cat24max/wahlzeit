@@ -65,7 +65,7 @@ public class PlanePhoto extends Photo {
 	 * @methodtype set
 	 */
     public void setAirportLocation(String airportLocation) {
-		assertValidICAOCode(airportLocation);
+		assertValidIATACode(airportLocation);
         this.airportLocation = airportLocation;
     }
 
@@ -92,16 +92,16 @@ public class PlanePhoto extends Photo {
 	}
 
 	public void assertValidAircraftType(String type) {
-		if((type.length() != 4 || type.length() != 3) && type != null) throw new IllegalArgumentException("Plane type is not a valid ICAO type designator");
+		if(type != null && (type.length() != 4 && type.length() != 3)) throw new IllegalArgumentException("Plane type is not a valid ICAO type designator ");
 	}
 
-	public void assertValidICAOCode(String airportLocation) {
-		if(airportLocation.length() != 4 && type != null) throw new IllegalArgumentException("airportLocation is not valid");
+	public void assertValidIATACode(String airportLocation) {
+		if(type != null && airportLocation.length() != 3) throw new IllegalArgumentException("airportLocation is not valid");
 	}
 
 	public void assertClassInvariants() {
 		super.assertClassInvariants();
 		assertValidAircraftType(this.type);
-		assertValidICAOCode(this.airportLocation);
+		assertValidIATACode(this.airportLocation);
 	}
 }

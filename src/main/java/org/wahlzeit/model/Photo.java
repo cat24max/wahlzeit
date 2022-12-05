@@ -158,7 +158,13 @@ public class Photo extends DataObject {
 		maxPhotoSize = PhotoSize.getFromWidthHeight(width, height);
 
 		// Possible issue: Null values lead to a (0,0,0) location being created
-		location = new Location(rset.getDouble("location_coord_x"), rset.getDouble("location_coord_y"), rset.getDouble("location_coord_z"));
+		try {
+			location = new Location(rset.getDouble("location_coord_x"), rset.getDouble("location_coord_y"), rset.getDouble("location_coord_z"));
+		} catch(IllegalArgumentException e) {
+			location = null;
+		}
+		
+		assertClassInvariants();
 	}
 	
 	/**

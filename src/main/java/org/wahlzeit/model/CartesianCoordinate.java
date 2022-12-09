@@ -1,18 +1,40 @@
 package org.wahlzeit.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CartesianCoordinate extends AbstractCoordinate {
     
     private double x, y, z;
+
+    private static Map<Integer, CartesianCoordinate> cache = new HashMap<>();
 
     /**
      *
      * @methodtype constructor
      */
-    public CartesianCoordinate(double x, double y, double z) {
+    private CartesianCoordinate(double x, double y, double z) {
         this.x = x;
         this.y = y;
         this.z = z;
         assertClassInvariants();
+    }
+
+    public static CartesianCoordinate getCartesianCoordinateObject(double x, double y, double z) {
+        int hash = CartesianCoordinate.calculateHash(x, y, z);
+        if(cache.containsKey(hash)) {
+            return cache.get(hash);
+        }
+        CartesianCoordinate newObject = new CartesianCoordinate(x, y, z);
+        cache.put(hash, newObject);
+        return newObject;
+    }
+
+    private static int calculateHash(double x, double y, double z) {
+        int hashX = Double.hashCode(x);
+        int hashY = Double.hashCode(y);
+        int hashZ = Double.hashCode(z);
+        return hashX + hashY + hashZ;
     }
 
     /**
@@ -47,16 +69,6 @@ public class CartesianCoordinate extends AbstractCoordinate {
         return Math.sqrt(Math.pow(other.x - this.x, 2) + Math.pow(other.y - this.y, 2) + Math.pow(other.z - this.z, 2));
     }
 
-    /**
-	 * 
-	 * @methodtype boolean-query
-	 */
-    protected boolean isEqual(CartesianCoordinate other) {
-        assertNotNull(other);
-        if(this == other) return true;
-        return isDoubleEqual(this.x, other.x) && isDoubleEqual(this.y, other.y) && isDoubleEqual(this.z, other.z);
-    }
-
     @Override
     public CartesianCoordinate asCartesianCoordinate() {
         return this;
@@ -72,11 +84,11 @@ public class CartesianCoordinate extends AbstractCoordinate {
         double radius = this.getCartesianDistance(origin);
         assertDoubleIsValid(radius);
         assertPositive(radius);
-        if(((Double) radius).equals(0.0)) return new SphericCoordinate(0, 0, 0);
+        if(((Double) radius).equals(0.0)) return SphericCoordinate.getSphericCoordinateObject(0, 0, 0);
 
         final double theta = Math.acos(z / radius);
         final double phi = Math.atan2(y, x);
-        SphericCoordinate result = new SphericCoordinate(phi, theta, radius);
+        SphericCoordinate result = SphericCoordinate.getSphericCoordinateObject(phi, theta, radius);
         assertNotNull(result);
         return result;
     }

@@ -33,9 +33,7 @@ public abstract class AbstractCoordinate implements Coordinate {
         assertClassInvariants();
         assertNotNull(other);
         if(!(other instanceof Coordinate)) return false;
-        boolean result = this.isEqual((Coordinate) other);
-        assertClassInvariants();
-        return result;
+        return this == other;
     }
 
     @Override

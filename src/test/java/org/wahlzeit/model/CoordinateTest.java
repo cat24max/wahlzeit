@@ -16,7 +16,7 @@ public class CoordinateTest {
 	 */
 	@Test
 	public void testCreateCartesianCoordinate() {
-        CartesianCoordinate coord = new CartesianCoordinate(1, 2, 3);
+        CartesianCoordinate coord = CartesianCoordinate.getCartesianCoordinateObject(1, 2, 3);
         assertEquals(1.0, coord.getX(), 0);
         assertEquals(2.0, coord.getY(), 0);
         assertEquals(3.0, coord.getZ(), 0);
@@ -34,8 +34,8 @@ public class CoordinateTest {
 	 */
 	@Test
 	public void testCartesianDistanceCalculations() {
-        assertCartesianDistance(new CartesianCoordinate(2, 1, 0), new CartesianCoordinate(2, 1, 2), 2.0);
-        assertCartesianDistance(new CartesianCoordinate(2, 13, -15), new CartesianCoordinate(-9, 8, 2), 20.9);
+        assertCartesianDistance(CartesianCoordinate.getCartesianCoordinateObject(2, 1, 0), CartesianCoordinate.getCartesianCoordinateObject(2, 1, 2), 2.0);
+        assertCartesianDistance(CartesianCoordinate.getCartesianCoordinateObject(2, 13, -15), CartesianCoordinate.getCartesianCoordinateObject(-9, 8, 2), 20.9);
 	}
 
     /**
@@ -43,8 +43,8 @@ public class CoordinateTest {
 	 */
 	@Test
 	public void testEqualsWrongValues() {
-        assertFalse(new CartesianCoordinate(2, 1, 3).equals(new Object()));
-        assertFalse(new Object().equals(new CartesianCoordinate(2, 1, 3)));
+        assertFalse(CartesianCoordinate.getCartesianCoordinateObject(2, 1, 3).equals(new Object()));
+        assertFalse(new Object().equals(CartesianCoordinate.getCartesianCoordinateObject(2, 1, 3)));
 	}
 
     /**
@@ -52,15 +52,15 @@ public class CoordinateTest {
 	 */
 	@Test
 	public void testEqualsSameNotSame() {
-        CartesianCoordinate coord = new CartesianCoordinate(2, 1, 0);
-        assertTrue(new CartesianCoordinate(2, 1, 0).equals(coord));
-        assertTrue(new CartesianCoordinate(2, 1, 0).equals(new CartesianCoordinate(2, 1, 0)));
-        assertFalse(new CartesianCoordinate(2, 1, 3).equals(coord));
+        CartesianCoordinate coord = CartesianCoordinate.getCartesianCoordinateObject(2, 1, 0);
+        assertTrue(CartesianCoordinate.getCartesianCoordinateObject(2, 1, 0).equals(coord));
+        assertTrue(CartesianCoordinate.getCartesianCoordinateObject(2, 1, 0).equals(CartesianCoordinate.getCartesianCoordinateObject(2, 1, 0)));
+        assertFalse(CartesianCoordinate.getCartesianCoordinateObject(2, 1, 3).equals(coord));
 
-		SphericCoordinate coord2 = new SphericCoordinate(23.64723, 9.7632, 120);
-		assertTrue(new SphericCoordinate(23.64723, 9.7632, 120).equals(coord2));
-        assertTrue(new SphericCoordinate(23.64723, 9.7632, 120).equals(new SphericCoordinate(23.64723, 9.7632, 120)));
-        assertFalse(new SphericCoordinate(23.64723, 9.7632, 120.252).equals(coord2));
+		SphericCoordinate coord2 = SphericCoordinate.getSphericCoordinateObject(23.64723, 9.7632, 120);
+		assertTrue(SphericCoordinate.getSphericCoordinateObject(23.64723, 9.7632, 120).equals(coord2));
+        assertTrue(SphericCoordinate.getSphericCoordinateObject(23.64723, 9.7632, 120).equals(SphericCoordinate.getSphericCoordinateObject(23.64723, 9.7632, 120)));
+        assertFalse(SphericCoordinate.getSphericCoordinateObject(23.64723, 9.7632, 120.252).equals(coord2));
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class CoordinateTest {
 	 */
 	@Test
 	public void testCartesianToSphericConversion() {
-        CartesianCoordinate coord = new CartesianCoordinate(2, 1, 0);
+        CartesianCoordinate coord = CartesianCoordinate.getCartesianCoordinateObject(2, 1, 0);
 		SphericCoordinate sph = coord.asSphericCoordinate();
 
 		assertEquals((Double) sph.getPhi(), (Double) 0.4636476, 0.01);
@@ -80,25 +80,10 @@ public class CoordinateTest {
 	 *
 	 */
 	@Test
-	public void testCartesianToSphericToCartesianConversion() {
-        CartesianCoordinate coord = new CartesianCoordinate(5, 13.5, 420.69);
-		SphericCoordinate sph = coord.asSphericCoordinate();
-		CartesianCoordinate backConverted = sph.asCartesianCoordinate();
-
-		assertEquals((Double) coord.getX(), (Double) backConverted.getX(), 0.01);
-		assertEquals((Double) coord.getY(), (Double) backConverted.getY(), 0.01);
-		assertEquals((Double) coord.getZ(), (Double) backConverted.getZ(), 0.01);
-		assertEquals(coord, backConverted);
-	}
-
-	/**
-	 *
-	 */
-	@Test
 	public void testCentralAngle() {
 		// Using a cartesian coord here on purpose
-		CartesianCoordinate coord1 = new CartesianCoordinate(2, 1, 0);
-        CartesianCoordinate coord2 = new CartesianCoordinate(5, 13.5, 420.42);
+		CartesianCoordinate coord1 = CartesianCoordinate.getCartesianCoordinateObject(2, 1, 0);
+        CartesianCoordinate coord2 = CartesianCoordinate.getCartesianCoordinateObject(5, 13.5, 420.42);
 		
 		double angleSame1 = coord1.getCentralAngle(coord1);
 		double angleSame2 = coord2.getCentralAngle(coord2);
@@ -117,7 +102,7 @@ public class CoordinateTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testCreateCartesianCoordinateWithInvalidDouble() {
-		new CartesianCoordinate(Double.NaN, 1, 0);
+		CartesianCoordinate.getCartesianCoordinateObject(Double.NaN, 1, 0);
 	}
 
 	/**
@@ -125,7 +110,25 @@ public class CoordinateTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testCreateSphericCoordinateWithInvalidDouble() {
-		new SphericCoordinate(Double.NaN, 1, 0);
+		SphericCoordinate.getSphericCoordinateObject(Double.NaN, 1, 0);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public void testCartesianCoordinateValueObjectDeduplication() {
+		CartesianCoordinate a1 = CartesianCoordinate.getCartesianCoordinateObject(1, 2, 3.53);
+		CartesianCoordinate b1 = CartesianCoordinate.getCartesianCoordinateObject(1, 2, 3.53);
+		assertEquals("Two coordiantes with same values should be equal (ValueObjects 1)", a1, b1);
+
+		SphericCoordinate a2 = SphericCoordinate.getSphericCoordinateObject(1, 2, 3.53);
+		SphericCoordinate b2 = SphericCoordinate.getSphericCoordinateObject(1, 2, 3.53);
+		assertEquals("Two coordiantes with same values should be equal (ValueObjects 2)", a2, b2);
+
+		SphericCoordinate a3 = CartesianCoordinate.getCartesianCoordinateObject(1, 2, 3.53).asSphericCoordinate();
+		SphericCoordinate b3 = CartesianCoordinate.getCartesianCoordinateObject(1, 2, 3.53).asSphericCoordinate();
+		assertEquals("Two coordiantes with same values should be equal (ValueObjects 3)", a3, b3);
 	}
 
 

@@ -1,18 +1,40 @@
 package org.wahlzeit.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class SphericCoordinate extends AbstractCoordinate{
     
     private double phi, theta, radius;
+
+    private static Map<Integer, SphericCoordinate> cache = new HashMap<>();
 
     /**
      *
      * @methodtype constructor
      */
-    public SphericCoordinate(double phi, double theta, double radius) {
+    private SphericCoordinate(double phi, double theta, double radius) {
         this.phi = phi;
         this.theta = theta;
         this.radius = radius;
         assertClassInvariants();
+    }
+
+    public static SphericCoordinate getSphericCoordinateObject(double phi, double theta, double radius) {
+        int hash = SphericCoordinate.calculateHash(phi, theta, radius);
+        if(cache.containsKey(hash)) {
+            return cache.get(hash);
+        }
+        SphericCoordinate newObject = new SphericCoordinate(phi, theta, radius);
+        cache.put(hash, newObject);
+        return newObject;
+    }
+
+    private static int calculateHash(double phi, double theta, double radius) {
+        int hashX = Double.hashCode(phi);
+        int hashY = Double.hashCode(theta);
+        int hashZ = Double.hashCode(radius);
+        return hashX + hashY + hashZ;
     }
 
     /**
@@ -39,22 +61,12 @@ public class SphericCoordinate extends AbstractCoordinate{
         return radius;
     }
 
-    /**
-	 * 
-	 * @methodtype boolean-query
-	 */
-    protected boolean isEqual(SphericCoordinate other) {
-        assertNotNull(other);
-        if(this == other) return true;
-        return isDoubleEqual(this.phi, other.phi) && isDoubleEqual(this.theta, other.theta) && isDoubleEqual(this.radius, other.radius);
-    }
-
     @Override
     public CartesianCoordinate asCartesianCoordinate() {
         double x = radius * Math.sin(theta) * Math.cos(phi);
         double y = radius * Math.sin(theta) * Math.sin(phi);
         double z = radius * Math.cos(theta);
-        CartesianCoordinate result = new CartesianCoordinate(x, y, z);
+        CartesianCoordinate result = CartesianCoordinate.getCartesianCoordinateObject(x, y, z);
         assertNotNull(result);
         return result;
     }

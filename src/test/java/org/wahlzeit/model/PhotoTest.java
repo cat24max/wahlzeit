@@ -29,7 +29,7 @@ public class PhotoTest {
     @Test
     public void testCreatePhotoWithLocation() {
         Photo photo = new Photo();
-        Coordinate coord = new CartesianCoordinate(1, 2, 3);
+        Coordinate coord = CartesianCoordinate.getCartesianCoordinateObject(1, 2, 3);
 
         photo.setLocation(new Location(1, 2, 3));
         assertEquals(1.0, photo.getLocation().getCoordinate().asCartesianCoordinate().getX(), 0);

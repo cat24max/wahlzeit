@@ -41,7 +41,7 @@ public class PlanePhotoTest {
     public void testReadFrom() throws SQLException {
         PlanePhoto photo = new PlanePhoto(mockedRset);
 
-        assertEquals("A359", photo.getAircraftType());
+        assertEquals("A359", photo.getAircraft().getAircraftType().getTypestring());
         assertEquals("NUE", photo.getAirportLocation());
     }
 

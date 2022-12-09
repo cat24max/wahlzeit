@@ -27,7 +27,7 @@ public class PlanePhotoManagerTest {
 
         PlanePhoto photo = PlanePhotoManager.getInstance().createObject(rset);
 
-        assertEquals("A359", photo.getAircraftType());
+        assertEquals("A359", photo.getAircraft().getAircraftType().getTypestring());
         assertEquals("NUE", photo.getAirportLocation());
     }
     

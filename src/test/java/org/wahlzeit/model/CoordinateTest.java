@@ -11,17 +11,6 @@ import static org.junit.Assert.assertTrue;
  */
 public class CoordinateTest {
 
-	/**
-	 *
-	 */
-	@Test
-	public void testCreateCartesianCoordinate() {
-        CartesianCoordinate coord = CartesianCoordinate.getCartesianCoordinateObject(1, 2, 3);
-        assertEquals(1.0, coord.getX(), 0);
-        assertEquals(2.0, coord.getY(), 0);
-        assertEquals(3.0, coord.getZ(), 0);
-	}
-
     /**
 	 *
 	 */

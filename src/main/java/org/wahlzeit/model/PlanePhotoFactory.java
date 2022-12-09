@@ -4,10 +4,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.wahlzeit.services.SysLog;
+import org.wahlzeit.utils.PatternInstance;
 
 /**
  * An Abstract Factory for creating plane photos and related objects.
  */
+@PatternInstance(
+        patternName = "Abstract Factory",
+        participants = {
+			"ConcreteFactory"
+		}
+)
+@PatternInstance(
+        patternName = "Singleton",
+		participants = {}
+)
 public class PlanePhotoFactory extends PhotoFactory {
     
     /**

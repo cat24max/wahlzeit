@@ -3,6 +3,12 @@ package org.wahlzeit.model;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.wahlzeit.utils.PatternInstance;
+
+@PatternInstance(
+        patternName = "ValueObject",
+        participants = {}
+)
 public class CartesianCoordinate extends AbstractCoordinate {
     
     private double x, y, z;

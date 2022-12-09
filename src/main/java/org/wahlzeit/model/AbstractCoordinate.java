@@ -1,5 +1,7 @@
 package org.wahlzeit.model;
 
+import org.wahlzeit.utils.PatternInstance;
+
 public abstract class AbstractCoordinate implements Coordinate {
     
     @Override
@@ -36,6 +38,12 @@ public abstract class AbstractCoordinate implements Coordinate {
         return this == other;
     }
 
+    @PatternInstance(
+            patternName = "Template Method",
+            participants = {
+                "Abstract Class", "Concrete Class"
+            }
+    )
     @Override
     public double getCartesianDistance(Coordinate other) {
         assertClassInvariants();
@@ -46,6 +54,12 @@ public abstract class AbstractCoordinate implements Coordinate {
         return result;
     }
 
+    @PatternInstance(
+            patternName = "Template Method",
+            participants = {
+                "Abstract Class", "Concrete Class"
+            }
+    )
     @Override
     public double getCentralAngle(Coordinate otherCoordinate) {
         assertClassInvariants();

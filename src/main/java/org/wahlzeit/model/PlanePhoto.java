@@ -3,6 +3,14 @@ package org.wahlzeit.model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.wahlzeit.utils.PatternInstance;
+
+@PatternInstance(
+        patternName = "Abstract Factory",
+        participants = {
+			"AbstractProduct"
+		}
+)
 public class PlanePhoto extends Photo {
 
     private String type; // 4 digit ICAO type code

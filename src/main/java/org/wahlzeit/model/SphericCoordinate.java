@@ -3,6 +3,12 @@ package org.wahlzeit.model;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.wahlzeit.utils.PatternInstance;
+
+@PatternInstance(
+        patternName = "ValueObject",
+        participants = {}
+)
 public class SphericCoordinate extends AbstractCoordinate{
     
     private double phi, theta, radius;

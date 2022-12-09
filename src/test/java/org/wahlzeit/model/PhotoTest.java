@@ -32,14 +32,9 @@ public class PhotoTest {
         Coordinate coord = CartesianCoordinate.getCartesianCoordinateObject(1, 2, 3);
 
         photo.setLocation(new Location(1, 2, 3));
-        assertEquals(1.0, photo.getLocation().getCoordinate().asCartesianCoordinate().getX(), 0);
-        assertEquals(2.0, photo.getLocation().getCoordinate().asCartesianCoordinate().getY(), 0);
-        assertEquals(3.0, photo.getLocation().getCoordinate().asCartesianCoordinate().getZ(), 0);
-
         photo.setLocation(1, 2, 3);
-        assertEquals(1.0, photo.getLocation().getCoordinate().asCartesianCoordinate().getX(), 0);
-        assertEquals(2.0, photo.getLocation().getCoordinate().asCartesianCoordinate().getY(), 0);
-        assertEquals(3.0, photo.getLocation().getCoordinate().asCartesianCoordinate().getZ(), 0);
+        
+        assertEquals("Coordinates should be equal after being set in Photo", photo.getLocation().getCoordinate(), coord);
     }
 
     /**
